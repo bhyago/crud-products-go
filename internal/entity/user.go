@@ -1,7 +1,6 @@
 package entity
 
 import (
-	"github.com/bhyago/crud-products-go/internal/entity"
 	"github.com/bhyago/crud-products-go/pkg/entity"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -13,14 +12,14 @@ type User struct {
 	Email    string    `json:"email"`
 }
 
-func NewUser(id int, name, password, email string) (*User, error) {
+func NewUser(name, password, email string) (*User, error) {
 	hash, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 	if err != nil {
 		return nil, err
 	}
 
 	return &User{
-		ID:       entity.NewID(id),
+		ID:       entity.NewID(),
 		Name:     name,
 		Password: string(hash),
 		Email:    email,
